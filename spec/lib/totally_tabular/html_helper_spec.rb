@@ -29,6 +29,10 @@ describe HtmlHelper do
     @helper.tag(:input).should == "<input>"
   end
 
+  it "returns an empty img tag" do
+    @helper.tag(:img).should == "<img>"
+  end
+
   it "returns a tag with content" do
     @helper.tag(:strong, "blah").should == "<strong>blah</strong>"
   end
@@ -44,5 +48,8 @@ describe HtmlHelper do
   it "renders with a href attribute specified" do
     url = "http://www.google.com"
     @helper.tag(:a, "blah", :href => url).should =~ /href=\"#{url}\"/
+  end
+
+  it "renders empty tags with attributes" do
   end
 end

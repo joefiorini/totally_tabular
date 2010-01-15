@@ -7,6 +7,8 @@ module TotallyTabular
         "<br>"
       when "input"
         "<input>"
+      when "img"
+        "<img>"
       when /^\w+$/
         if attributes.any?
           attr_string = 
