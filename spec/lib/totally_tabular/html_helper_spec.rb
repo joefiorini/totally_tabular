@@ -16,4 +16,8 @@ describe HtmlHelper do
   it "returns empty string" do
     @helper.tag("").should be_empty
   end
+
+  it "returns an empty table tag" do
+    @helper.tag(:table).should == "<table></table>"
+  end
 end
