@@ -20,4 +20,16 @@ describe HtmlHelper do
   it "returns an empty table tag" do
     @helper.tag(:table).should == "<table></table>"
   end
+
+  it "returns an empty br tag" do
+    @helper.tag(:br).should == "<br>"
+  end
+
+  it "returns an empty input tag" do
+    @helper.tag(:input).should == "<input>"
+  end
+
+  it "returns a tag with content" do
+    @helper.tag(:strong, "blah").should == "<strong>blah</strong>"
+  end
 end

@@ -1,11 +1,18 @@
 module TotallyTabular
   class HtmlHelper
 
-    def tag(tag)
+    def tag(tag, content="")
       if tag.to_s.empty?
         ""
       else
-        "<table></table>"
+        case tag
+        when :br
+          "<br>"
+        when :input
+          "<input>"
+        else
+          "<%s>%s</%s>" % [tag, content, tag]
+        end
       end
     end
   end
