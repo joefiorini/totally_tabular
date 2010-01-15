@@ -5,14 +5,17 @@ module TotallyTabular
     def tag(tag, content="", attributes={})
       case tag.to_s
       when EMPTY_TAG
-        "<%s>" % tag
+        "<%s%s>" % [tag, attrs(attributes)]
       when /^\w+$/
-        if attributes.any?
-          attr_string = 
-          attr_string = ' %s' % attributes.map { |attr| '%s="%s"' % attr }.join(" ")
-        end
-        "<%s%s>%s</%s>" % [tag, attr_string, content, tag]
+        "<%s%s>%s</%s>" % [tag, attrs(attributes), content, tag]
       end
+    end
+
+    private
+
+    def attrs(attributes)
+      return "" if attributes.empty?
+      attr_string = ' %s' % attributes.map { |attr| '%s="%s"' % attr }.join(" ")
     end
   end
 end

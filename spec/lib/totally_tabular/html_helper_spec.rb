@@ -43,5 +43,7 @@ describe HtmlHelper do
   end
 
   it "renders empty tags with attributes" do
+    src = "http://www.asite.com/images/my_image.jpg"
+    @helper.tag(:img, "", :src => src).should =~ /src=\"#{src}\"/
   end
 end
