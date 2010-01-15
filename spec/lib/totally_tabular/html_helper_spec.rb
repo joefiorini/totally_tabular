@@ -13,10 +13,6 @@ describe HtmlHelper do
     @helper.should_not be_nil
   end
 
-  it "returns empty string" do
-    @helper.tag("").should be_empty
-  end
-
   it "returns an empty table tag" do
     @helper.tag(:table).should == "<table></table>"
   end
@@ -35,10 +31,6 @@ describe HtmlHelper do
 
   it "returns a tag with content" do
     @helper.tag(:strong, "blah").should == "<strong>blah</strong>"
-  end
-
-  it "returns empty if tag is invalid" do
-    @helper.tag("blah diddy").should == ""
   end
 
   it "renders with a class specified" do

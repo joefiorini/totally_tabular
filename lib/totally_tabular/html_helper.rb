@@ -12,8 +12,6 @@ module TotallyTabular
           attr_string = ' %s' % attributes.map { |attr| '%s="%s"' % attr }.join(" ")
         end
         "<%s%s>%s</%s>" % [tag, attr_string, content, tag]
-      else
-        ""
       end
     end
   end
