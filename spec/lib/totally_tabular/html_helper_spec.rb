@@ -32,4 +32,12 @@ describe HtmlHelper do
   it "returns a tag with content" do
     @helper.tag(:strong, "blah").should == "<strong>blah</strong>"
   end
+
+  it "returns empty if tag is invalid" do
+    @helper.tag("blah diddy").should == ""
+  end
+
+  it "renders with a class specified" do
+    @helper.tag(:strong, "blah", :class => "diddy").should =~ /class=\"diddy\"/
+  end
 end

@@ -1,14 +1,18 @@
 module TotallyTabular
   class HtmlHelper
 
-    def tag(tag, content="")
+    def tag(tag, content="", attributes={})
       case tag.to_s
       when "br"
         "<br>"
       when "input"
         "<input>"
       when /^\w+$/
-        "<%s>%s</%s>" % [tag, content, tag]
+        if attributes.any?
+          css_class = attributes[:class]
+          attr_string = ' class="%s"' % css_class
+        end
+        "<%s%s>%s</%s>" % [tag, attr_string, content, tag]
       else
         ""
       end
