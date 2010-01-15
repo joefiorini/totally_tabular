@@ -40,4 +40,9 @@ describe HtmlHelper do
   it "renders with a class specified" do
     @helper.tag(:strong, "blah", :class => "diddy").should =~ /class=\"diddy\"/
   end
+
+  it "renders with a href attribute specified" do
+    url = "http://www.google.com"
+    @helper.tag(:a, "blah", :href => url).should =~ /href=\"#{url}\"/
+  end
 end

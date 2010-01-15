@@ -9,8 +9,8 @@ module TotallyTabular
         "<input>"
       when /^\w+$/
         if attributes.any?
-          css_class = attributes[:class]
-          attr_string = ' class="%s"' % css_class
+          attr_string = 
+          attr_string = ' %s' % attributes.map { |attr| '%s="%s"' % attr }.join(" ")
         end
         "<%s%s>%s</%s>" % [tag, attr_string, content, tag]
       else
