@@ -1,14 +1,11 @@
 module TotallyTabular
   class HtmlHelper
 
+    EMPTY_TAG = /br|input|img/
     def tag(tag, content="", attributes={})
       case tag.to_s
-      when "br"
-        "<br>"
-      when "input"
-        "<input>"
-      when "img"
-        "<img>"
+      when EMPTY_TAG
+        "<%s>" % tag
       when /^\w+$/
         if attributes.any?
           attr_string = 
