@@ -3,10 +3,9 @@ module TotallyTabular
 
     EMPTY_TAG = /br|input|img/
     def tag(tag, content="", attributes={})
-      case tag.to_s
-      when EMPTY_TAG
+      if tag.to_s =~ EMPTY_TAG
         "<%s%s>" % [tag, attrs(attributes)]
-      when /^\w+$/
+      else
         "<%s%s>%s</%s>" % [tag, attrs(attributes), content, tag]
       end
     end
