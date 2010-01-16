@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/table'
 require File.dirname(__FILE__) + '/column'
 require File.dirname(__FILE__) + '/row'
+require File.dirname(__FILE__) + '/html_helper'
 
 module TotallyTabular
   class TableView
@@ -9,6 +10,7 @@ module TotallyTabular
       @collection = collection
       @options = options
       @column_definition = block
+      @helper = HtmlHelper.new
     end
 
     def render
@@ -20,10 +22,10 @@ module TotallyTabular
                   build_headers(table.columns)
                 end
       rows = build_rows(@collection, table.columns)
-      tbody = content_tag(:tbody, rows.join)
-      thead = content_tag(:thead, headers)
-      tfoot = content_tag(:tfoot)
-      content_tag(:table, [thead, tbody, tfoot], options)
+      tbody = @helper.content_tag(:tbody, rows.join)
+      thead = @helper.content_tag(:thead, headers)
+      tfoot = @helper.content_tag(:tfoot)
+      @helper.content_tag(:table, [thead, tbody, tfoot], options)
     end
 
     def options
@@ -36,14 +38,14 @@ module TotallyTabular
       collection.map do |item|
         row = Row.new
         row.render(columns.map do |column|
-          content_tag(:td, column.template.call(item, row))
+          @helper.content_tag(:td, column.template.call(item, row))
         end.join)
       end
     end
 
     def build_headers(columns)
       headers = columns.map do |column|
-        content_tag(:th, column.name, column.header_attributes)
+        @helper.content_tag(:th, column.name, column.header_attributes)
       end
       Row.new.render(headers)
     end
