@@ -16,12 +16,12 @@ module TotallyTabular
     def render
       table = Table.new
       table.instance_eval(&@column_definition)
+      rows = build_rows(@collection, table.columns)
       headers = if @collection.empty?
                   ""
                 else
                   build_headers(table.columns)
                 end
-      rows = build_rows(@collection, table.columns)
       tbody = @helper.content_tag(:tbody, rows.join)
       thead = @helper.content_tag(:thead, headers)
       tfoot = @helper.content_tag(:tfoot)
@@ -39,6 +39,7 @@ module TotallyTabular
         row = Row.new
         row_attributes = nil
         row.render(columns.map do |column|
+          column.instance_exec(item, &column.definition)
           row.attributes!(column.row_attributes)
           @helper.content_tag(:td, column.template.call(item, row))
         end.join)

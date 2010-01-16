@@ -116,6 +116,19 @@ describe TableView do
       selector(t.render, "table tr.diddy").length.should == 1
     end
 
+    it "allows defining a class from an object attribute" do
+      obj = OpenStruct.new(:status => 'unread')
+      t = TableView.new([obj]) do
+        define_column("Blah") do |o|
+          row_attributes!(:class => o.status)
+          template! do
+          end
+        end
+      end
+
+      selector(t.render, "table tr.unread").length.should == 1
+    end
+
     it "should take a block and give a table class" do
       table = TableView::Table.new
       TableView::Table.stub!(:new).and_return(table)

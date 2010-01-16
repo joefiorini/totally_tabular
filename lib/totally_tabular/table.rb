@@ -7,8 +7,7 @@ module TotallyTabular
     end
 
     def define_column(name, header_attributes={}, &block)
-      column = Column.new(name)
-      column.instance_eval(&block)
+      column = Column.new(name, &block)
       @columns << column
     end
 

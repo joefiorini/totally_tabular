@@ -1,11 +1,12 @@
 module TotallyTabular
   class Column
-    attr_accessor :name, :template, :header_attributes, :row_attributes
+    attr_accessor :name, :template, :header_attributes, :row_attributes, :definition
 
-    def initialize(name)
+    def initialize(name, &block)
       @name = name
       @header_attributes = {}
       @row_attributes = {}
+      @definition = block
     end
 
     def template!(&block)
