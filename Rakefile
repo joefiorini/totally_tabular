@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "totally_tabular"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{DSL for creating HTML tables}
+    gem.description = %Q{HTML tables are a pain in the ass. Use totaly_tabular to help make creating tables a breeze!}
     gem.email = "joe@joefiorini.com"
     gem.homepage = "http://github.com/faithfulgeek/totally_tabular"
     gem.authors = ["Joe Fiorini"]
