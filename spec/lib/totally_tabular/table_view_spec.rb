@@ -63,13 +63,13 @@ describe TableView do
       o3 = OpenStruct.new(:name => "Gary", :coolness => "Eh.", :age => 26)
       o4 = OpenStruct.new(:name => "Josh", :coolness => "Lame.", :age => 26)
       @table_view = TableView.new([o, o2, o3, o4]) do |t|
-        t.define_column("Name") do |column|
-          column.template! do |o, row|
+        t.define_column("Name") do
+          template! do |o, row|
             "%s is %s" % [o.name, o.coolness]
           end
         end
-        t.define_column("Age") do |column|
-          column.template! do |o, row|
+        t.define_column("Age") do
+          template! do |o, row|
             o.age
           end
         end
@@ -94,8 +94,9 @@ describe TableView do
 
     it "allows defining class on header" do
       t = TableView.new([1]) do
-        define_column("Blah", :class => "blahdiddy") do |column|
-          column.template! do |o, row|
+        define_column("Blah") do
+          header_attributes!(:class => 'blahdiddy')
+          template! do |o, row|
           end
         end
       end
@@ -117,8 +118,8 @@ describe TableView do
 
     it "should allow me to define a column" do
       column_definition = Proc.new do
-        define_column("Joe") do |column|
-          column.template! do
+        define_column("Joe") do
+          template! do
           end
         end
       end
@@ -129,8 +130,8 @@ describe TableView do
 
     it "should allow defining the column body when defining the column" do
       t = TableView.new(["Judge"]) do
-        define_column("Name") do |column|
-          column.template! do |item, row|
+        define_column("Name") do
+          template! do |item, row|
             "My name is %s." % item
           end
         end
