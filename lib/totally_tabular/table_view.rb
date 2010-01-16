@@ -15,7 +15,7 @@ module TotallyTabular
 
     def render
       table = Table.new
-      table.instance_eval(&@column_definition)
+      @column_definition.call(table)
       headers = if @collection.empty?
                   ""
                 else

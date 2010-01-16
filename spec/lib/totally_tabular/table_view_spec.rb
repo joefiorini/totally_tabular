@@ -105,8 +105,8 @@ describe TableView do
     end
 
     it "allows defining class on header" do
-      t = TableView.new([1]) do
-        column("Blah", :class => "blahdiddy") do |column|
+      t = TableView.new([1]) do |table|
+        table.column("Blah", :class => "blahdiddy") do |column|
           column.template! do |o, row|
           end
         end
