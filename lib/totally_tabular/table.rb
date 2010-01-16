@@ -6,7 +6,7 @@ module TotallyTabular
       @columns = []
     end
 
-    def column(name, header_attributes={}, &block)
+    def define_column(name, header_attributes={}, &block)
       column = Column.new(name)
       block.call(column)
       column.header_attributes = header_attributes
