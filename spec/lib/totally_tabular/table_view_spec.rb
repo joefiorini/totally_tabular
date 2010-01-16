@@ -63,13 +63,13 @@ describe TableView do
       o3 = OpenStruct.new(:name => "Gary", :coolness => "Eh.", :age => 26)
       o4 = OpenStruct.new(:name => "Josh", :coolness => "Lame.", :age => 26)
       @table_view = TableView.new([o, o2, o3, o4]) do |t|
-        t.define_column("Name") do
-          template! do |o, row|
+        t.define_column("Name") do |o|
+          template! do
             "%s is %s" % [o.name, o.coolness]
           end
         end
-        t.define_column("Age") do
-          template! do |o, row|
+        t.define_column("Age") do |o|
+          template! do
             o.age
           end
         end
@@ -94,9 +94,9 @@ describe TableView do
 
     it "allows defining class on header" do
       t = TableView.new([1]) do
-        define_column("Blah") do
+        define_column("Blah") do |o|
           header_attributes!(:class => 'blahdiddy')
-          template! do |o, row|
+          template! do
           end
         end
       end
@@ -106,9 +106,9 @@ describe TableView do
 
     it "allows defining a class on row" do
       t = TableView.new([1]) do
-        define_column("Blah") do
+        define_column("Blah") do |o|
           row_attributes!(:class => 'diddy')
-          template! do |o, row|
+          template! do
           end
         end
       end
@@ -127,6 +127,17 @@ describe TableView do
       end
 
       selector(t.render, "table tr.unread").length.should == 1
+    end
+
+    it "allows defining a class on the cell" do
+      t = TableView.new([1]) do
+        define_column("Blah") do |o|
+          cell_attributes!(:class => 'diddy')
+          template! {}
+        end
+      end
+
+      selector(t.render, "table td.diddy").length.should == 1
     end
 
     it "should take a block and give a table class" do
@@ -155,8 +166,8 @@ describe TableView do
 
     it "should allow defining the column body when defining the column" do
       t = TableView.new(["Judge"]) do
-        define_column("Name") do
-          template! do |item, row|
+        define_column("Name") do |item|
+          template! do
             "My name is %s." % item
           end
         end

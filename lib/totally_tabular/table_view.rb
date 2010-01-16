@@ -41,7 +41,7 @@ module TotallyTabular
         row.render(columns.map do |column|
           column.instance_exec(item, &column.definition)
           row.attributes!(column.row_attributes)
-          @helper.content_tag(:td, column.template.call(item, row))
+          @helper.content_tag(:td, column.template.call(item, row), column.cell_attributes)
         end.join)
       end
     end
