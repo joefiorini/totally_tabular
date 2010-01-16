@@ -37,7 +37,9 @@ module TotallyTabular
     def build_rows(collection, columns)
       collection.map do |item|
         row = Row.new
+        row_attributes = nil
         row.render(columns.map do |column|
+          row.attributes!(column.row_attributes)
           @helper.content_tag(:td, column.template.call(item, row))
         end.join)
       end

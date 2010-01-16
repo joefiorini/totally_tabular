@@ -104,6 +104,18 @@ describe TableView do
       selector(t.render, "table th.blahdiddy").length.should == 1
     end
 
+    it "allows defining a class on row" do
+      t = TableView.new([1]) do
+        define_column("Blah") do
+          row_attributes!(:class => 'diddy')
+          template! do |o, row|
+          end
+        end
+      end
+
+      selector(t.render, "table tr.diddy").length.should == 1
+    end
+
     it "should take a block and give a table class" do
       table = TableView::Table.new
       TableView::Table.stub!(:new).and_return(table)
