@@ -12,8 +12,8 @@ describe TableView do
   end
 
   before do
-    @table_view = TableView.new([]) do |table|
-      table.column("col") do |o|
+    @table_view = TableView.new([]) do
+      column("col") do |o|
       end
     end
   end
@@ -92,21 +92,9 @@ describe TableView do
 
   context "defining columns" do
 
-    before do
-      t = TableView.new([1]) do |table|
-        table.column("Blah") do |column|
-          @column_object = column
-          column.template! do |o, row|
-            @row_object = row
-          end
-        end
-      end
-      t.render
-    end
-
     it "allows defining class on header" do
-      t = TableView.new([1]) do |table|
-        table.column("Blah", :class => "blahdiddy") do |column|
+      t = TableView.new([1]) do
+        column("Blah", :class => "blahdiddy") do |column|
           column.template! do |o, row|
           end
         end
@@ -115,42 +103,21 @@ describe TableView do
       selector(t.render, "table th.blahdiddy").length.should == 1
     end
 
-    it "yields a column object" do
-      @column_object.should_not be_nil
-    end
-
-    it "should allow template definition" do
-      lambda{ @column_object.template! }.should_not raise_error
-    end
-
-    it "yields a row object" do
-      @row_object.should_not be_nil
-    end
-
-    it "allows defining attributes on a row" do
-      lambda{ @row_object.attributes! }.should_not raise_error
-    end
-
-    it "allows defining a class on a row" do
-      @row_object.attributes!(:class => "yourmom")
-      selector(@row_object.render("aaa"), "tr.yourmom").should_not be_empty
-    end
-
     it "should take a block and give a table class" do
       table = TableView::Table.new
       TableView::Table.stub!(:new).and_return(table)
 
-      column_definition = Proc.new { |table| }
+      column_definition = Proc.new {  }
       table_view = TableView.new([], {}, &column_definition)
 
-      column_definition.should_receive(:call).with(table)
+      table.should_receive(:instance_eval)
 
       table_view.render
     end
 
     it "should allow me to define a column" do
-      column_definition = Proc.new do |table|
-        table.column("Joe") do |column|
+      column_definition = Proc.new do
+        column("Joe") do |column|
           column.template! do
           end
         end
@@ -161,8 +128,8 @@ describe TableView do
     end
 
     it "should allow defining the column body when defining the column" do
-      t = TableView.new(["Judge"]) do |table|
-        table.column("Name") do |column|
+      t = TableView.new(["Judge"]) do
+        column("Name") do |column|
           column.template! do |item, row|
             "My name is %s." % item
           end
