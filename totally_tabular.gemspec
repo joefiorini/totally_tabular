@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joe Fiorini"]
   s.date = %q{2010-01-16}
-  s.description = %q{TODO: longer description of your gem}
+  s.description = %q{HTML tables are a pain in the ass. Use totaly_tabular to help make creating tables a breeze!}
   s.email = %q{joe@joefiorini.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -36,13 +36,14 @@ Gem::Specification.new do |s|
      "spec/lib/totally_tabular/table_view_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
-     "spec/totally_tabular_spec.rb"
+     "spec/totally_tabular_spec.rb",
+     "totally_tabular.gemspec"
   ]
   s.homepage = %q{http://github.com/faithfulgeek/totally_tabular}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.summary = %q{DSL for creating HTML tables}
   s.test_files = [
     "spec/lib/core_ext/instance_exec_spec.rb",
      "spec/lib/totally_tabular/html_helper_spec.rb",
