@@ -1,7 +1,8 @@
 module TotallyTabular
   class HtmlHelper
 
-    EMPTY_TAG = /br|input|img/
+    EMPTY_TAG = /br|hr|img|meta|link|input|base|area|col|frame|param/
+
     def content_tag(tag, content="", attributes={})
       if tag.to_s =~ EMPTY_TAG
         "<%s%s>" % [tag, attrs(attributes)]
