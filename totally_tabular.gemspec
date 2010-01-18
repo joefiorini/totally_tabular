@@ -9,18 +9,18 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joe Fiorini"]
-  s.date = %q{2010-01-16}
+  s.date = %q{2010-01-17}
   s.description = %q{HTML tables are a pain in the ass. Use totaly_tabular to help make creating tables a breeze!}
   s.email = %q{joe@joefiorini.com}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.textile"
   ]
   s.files = [
     ".document",
      ".gitignore",
      "LICENSE",
-     "README.rdoc",
+     "README.textile",
      "Rakefile",
      "VERSION",
      "lib/core_ext/object.rb",
