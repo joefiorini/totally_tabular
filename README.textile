@@ -1,0 +1,79 @@
+h1. Totally Tabular!
+
+  Assuming I have 5 people with:
+
+    * first_name
+    * last_name
+    * registration_status
+
+  My pointy-haired boss wants to see a list of these people on our
+  administrative dashboard. Sure, I could write some ugly ERB like so:
+
+<pre>
+  <code>
+    <table class="people">
+      <thead>
+      <tr>
+        <th class="header">First Name</th>
+        <th>Last Name</th>
+        <th>Registration Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @people.each do |person| %>
+        <tr class="<%= person.registration_status %>">
+          <td>Michael Bluth</td>
+          <td>Bluth</td>
+          <td>
+            <% if person.registered? %>
+              <strong>Registered</strong>
+            <% else %>
+              <em>Unregistered</em>
+            <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </code>
+</pre>
+
+  But why? I mean, we're using Ruby for Pete's sake! How about a cleaner way to do the same thing?
+
+<pre>
+  <code>
+    <%= person_table(people_presenter.people, :class => 'people') %>
+  </code>
+</pre>
+
+  Okay, so that's just a custom Rails helper method. Nothing special. But let's look at the definition of the helper method! That's where the special sauce is.
+
+<pre>
+  <code>
+    def person_table(people, attributes={})
+      TableView.new(@people, :class => 'people') do
+        define_column("First Name") do |person|
+          header_attributes!(:class => 'header')
+          row_attributes!(:class => person.registration_status)
+          template! do
+            person.first_name
+          end
+        end
+        define_column("Last Name") do |person|
+          template! do
+            person.last_name
+          end
+        end
+        define_column("Registration Status") do |person|
+          template! do
+            if person.registered?
+              content_tag(:strong, "Registered")
+            else
+              content_tag(:em, "Unregistered")
+            end
+          end
+        end
+      end
+    end
+  </code>
+</pre>
+
