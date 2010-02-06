@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{totally_tabular}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joe Fiorini"]
-  s.date = %q{2010-01-17}
+  s.date = %q{2010-02-06}
   s.description = %q{HTML tables are a pain in the ass. Use totaly_tabular to help make creating tables a breeze!}
   s.email = %q{joe@joefiorini.com}
   s.extra_rdoc_files = [
