@@ -177,4 +177,24 @@ describe TableView do
     end
 
   end
+
+  it "should allow me to call other methods in the same class" do
+    class TableHelper
+      def embolden_text(text)
+        "<strong>%s</strong>" % text
+      end
+      def render_table
+        TableView.new(["Teamicil"], :self => self) do
+          define_column("Drugs") do |item|
+            template! do
+              embolden_text(item)
+            end
+          end
+        end.render
+      end
+    end
+    t = ""
+    lambda { t = TableHelper.new.render_table }.should_not raise_error
+    selector(t, "table tr td strong").inner_html.should == "Teamicil"
+  end
 end

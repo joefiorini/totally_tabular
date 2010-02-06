@@ -8,6 +8,7 @@ module TotallyTabular
 
     def initialize(collection, options={}, &block)
       @collection = collection
+      @calling_object = options.delete(:self)
       @options = options
       @column_definition = block
       @helper = HtmlHelper.new
@@ -41,7 +42,7 @@ module TotallyTabular
         row.render(columns.map do |column|
           column.instance_exec(item, &column.definition)
           row.attributes!(column.row_attributes)
-          @helper.content_tag(:td, column.template.call(item, row), column.cell_attributes)
+          @helper.content_tag(:td, @calling_object.instance_exec(item, row, &column.template), column.cell_attributes)
         end.join)
       end
     end
